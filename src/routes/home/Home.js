@@ -17,20 +17,56 @@ import {
   Tooltip,
   XAxis, YAxis, Area,
   CartesianGrid, AreaChart, Bar, BarChart,
-  ResponsiveContainer } from '../../vendor/recharts';
+  ResponsiveContainer, Legend } from '../../vendor/recharts';
 
-const title = 'Sb Admin React';
+const title = 'LearningCurve Analytics';
 
 
 const data = [
-      { name: 'Page A', uv: 4000, pv: 2400, amt: 2400, value: 600 },
-      { name: 'Page B', uv: 3000, pv: 1398, amt: 2210, value: 300 },
-      { name: 'Page C', uv: 2000, pv: 9800, amt: 2290, value: 500 },
-      { name: 'Page D', uv: 2780, pv: 3908, amt: 2000, value: 400 },
-      { name: 'Page E', uv: 1890, pv: 4800, amt: 2181, value: 200 },
-      { name: 'Page F', uv: 2390, pv: 3800, amt: 2500, value: 700 },
-      { name: 'Page G', uv: 3490, pv: 4300, amt: 2100, value: 100 },
+      { name: 'S1:T1', '90+': 287, '70-89': 96, '69<': 62, value: 600 },
+      { name: 'S1:T2', '90+': 312, '70-89': 54, '69<': 87, value: 300 },
+      { name: 'S1:T3', '90+': 409, '70-89': 187, '69<': 109, value: 500 },
+      { name: 'S1:T4', '90+': 387, '70-89': 87, '69<': 122, value: 400 },
+      { name: 'S2:T1', '90+': 267, '70-89': 210, '69<': 122, value: 200 },
+      { name: 'S2:T2', '90+': 199, '70-89': 128, '69<': 39, value: 700 },
+      { name: 'S2:T3', '90+': 256, '70-89': 89, '69<': 49, value: 100 },
+      { name: 'S2:T4', '90+': 189, '70-89': 54, '69<': 28, value: 100 },
+      { name: 'S2:T5', '90+': 280, '70-89': 200, '69<': 52, value: 100 },
+      { name: 'S2:T6', '90+': 234, '70-89': 28, '69<': 89, value: 100 },
+      { name: 'S3:T1', '90+': 487, '70-89': 98, '69<': 65, value: 100 },
+      { name: 'S3:T2', '90+': 245, '70-89': 263, '69<': 89, value: 100 },
+      { name: 'S3:T2', '90+': 214, '70-89': 145, '69<': 120, value: 100 },
+      { name: 'S3:T3', '90+': 145, '70-89': 198, '69<': 123, value: 100 },
+      { name: 'S3:T4', '90+': 288, '70-89': 120, '69<': 54, value: 100 },
+
 ];
+
+const data2 = [
+      { name: 'S1:T1', fa: 89, rt: 88},
+      { name: 'S1:T2', fa: 74, rt: 91},
+      { name: 'S1:T3', fa: 76, rt: 76},
+      { name: 'S1:T4', fa: 69, rt: 72},
+      { name: 'S2:T1', fa: 92, rt: 94},
+      { name: 'S2:T2', fa: 76, rt: 89},
+      { name: 'S2:T3', fa: 48, rt: 71},
+      { name: 'S2:T4', fa: 87, rt: 88},
+      { name: 'S2:T5', fa: 46, rt: 67},
+      { name: 'S2:T6', fa: 59, rt: 69},
+      { name: 'S3:T1', fa: 65, rt: 80},
+      { name: 'S3:T2', fa: 58, rt: 81},
+      { name: 'S3:T2', fa: 87, rt: 76},
+      { name: 'S3:T3', fa: 46, rt: 58},
+      { name: 'S3:T4', fa: 87, rt: 88},
+
+];
+
+const browserData = [
+  { name: 'Chrome', value: 49 },
+  { name: 'Safari', value: 12 },
+  { name: 'Firefox', value: 24 },
+  { name: 'IE', value: 9 },
+  { name: 'Other', value: 6 }
+]
 
 function Home(props, context) {
   context.setTitle(title);
@@ -38,7 +74,7 @@ function Home(props, context) {
     <div>
       <div className="row">
         <div className="col-lg-12">
-          <PageHeader>Dashboard</PageHeader>
+          <PageHeader>My Dashboard</PageHeader>
         </div>
       </div>
 
@@ -46,9 +82,9 @@ function Home(props, context) {
         <div className="col-lg-3 col-md-6">
           <StatWidget
             style="panel-primary"
-            icon="fa fa-comments fa-5x"
-            count="26"
-            headerText="New Comments!"
+            icon="fa fa-users fa-5x"
+            count="1092"
+            headerText="Active Students"
             footerText="View Details"
             linkTo="/"
           />
@@ -57,8 +93,8 @@ function Home(props, context) {
           <StatWidget
             style="panel-green"
             icon="fa fa-tasks fa-5x"
-            count="12"
-            headerText="New Tasks!"
+            count="34"
+            headerText="Activity Titles"
             footerText="View Details"
             linkTo="/"
           />
@@ -66,9 +102,9 @@ function Home(props, context) {
         <div className="col-lg-3 col-md-6">
           <StatWidget
             style="panel-yellow"
-            icon="fa fa-shopping-cart fa-5x"
-            count="124"
-            headerText="New Orders!"
+            icon="fa fa-clock-o fa-5x"
+            count="73 mins"
+            headerText="Avg Time on Task"
             footerText="View Details"
             linkTo="/"
           />
@@ -76,9 +112,9 @@ function Home(props, context) {
         <div className="col-lg-3 col-md-6">
           <StatWidget
             style="panel-red"
-            icon="fa fa-support fa-5x"
-            count="13"
-            headerText="Support Tickets!"
+            icon="fa fa-exclamation-triangle fa-5x"
+            count="7"
+            headerText="App Errors"
             footerText="View Details"
             linkTo="/"
           />
@@ -90,14 +126,14 @@ function Home(props, context) {
 
           <Panel
             header={<span>
-              <i className="fa fa-bar-chart-o fa-fw" /> Area Chart Example
+              <i className="fa fa-bar-chart-o fa-fw" /> Average Time (in seconds) and Progress
               <div className="pull-right">
-                <DropdownButton title="Dropdown" bsSize="xs" pullRight id="dropdownButton1" >
-                  <MenuItem eventKey="1">Action</MenuItem>
-                  <MenuItem eventKey="2">Another action</MenuItem>
-                  <MenuItem eventKey="3">Something else here</MenuItem>
+                <DropdownButton title="Options" bsSize="xs" pullRight id="dropdownButton1" >
+                  <MenuItem eventKey="1">Export as CSV</MenuItem>
+                  <MenuItem eventKey="2">Export as PDF</MenuItem>
+                  <MenuItem eventKey="3">View JSON</MenuItem>
                   <MenuItem divider />
-                  <MenuItem eventKey="4">Separated link</MenuItem>
+                  <MenuItem eventKey="4">Email Chart</MenuItem>
                 </DropdownButton>
               </div>
             </span>}
@@ -109,9 +145,10 @@ function Home(props, context) {
                   <YAxis />
                   <CartesianGrid stroke="#ccc" />
                   <Tooltip />
-                  <Area type="monotone" dataKey="uv" stackId="1" stroke="#8884d8" fill="#8884d8" />
-                  <Area type="monotone" dataKey="pv" stackId="1" stroke="#82ca9d" fill="#82ca9d" />
-                  <Area type="monotone" dataKey="amt" stackId="1" stroke="#ffc658" fill="#ffc658" />
+                  <Legend verticalAlign="bottom" />
+                  <Area type="monotone" dataKey="90+" stackId="1" stroke="#8884d8" fill="#e84c31" />
+                  <Area type="monotone" dataKey="70-89" stackId="1" stroke="#82ca9d" fill="#f7f038" />
+                  <Area type="monotone" dataKey="69<" stackId="1" stroke="#ffc658" fill="#2bc83f" />
                 </AreaChart>
               </ResponsiveContainer>
             </div>
@@ -120,97 +157,29 @@ function Home(props, context) {
 
           <Panel
             header={<span>
-              <i className="fa fa-bar-chart-o fa-fw" /> Bar Chart Example
+              <i className="fa fa-bar-chart-o fa-fw" /> First Attempt vs. Second Attempt
               <div className="pull-right">
-                <DropdownButton title="Dropdown" bsSize="xs" pullRight id="dropdownButton2">
-                  <MenuItem eventKey="1">Action</MenuItem>
-                  <MenuItem eventKey="2">Another action</MenuItem>
-                  <MenuItem eventKey="3">Something else here</MenuItem>
+                <DropdownButton title="Options" bsSize="xs" pullRight id="dropdownButton1" >
+                  <MenuItem eventKey="1">Export as CSV</MenuItem>
+                  <MenuItem eventKey="2">Export as PDF</MenuItem>
+                  <MenuItem eventKey="3">View JSON</MenuItem>
                   <MenuItem divider />
-                  <MenuItem eventKey="4">Separated link</MenuItem>
+                  <MenuItem eventKey="4">Email Chart</MenuItem>
                 </DropdownButton>
               </div>
             </span>}
           >
             <div>
               <ResponsiveContainer width="100%" aspect={2}>
-                <BarChart data={data} margin={{ top: 10, right: 30, left: 0, bottom: 0 }} >
+                <BarChart data={data2} margin={{ top: 10, right: 30, left: 0, bottom: 0 }} >
                   <CartesianGrid stroke="#ccc" />
                   <XAxis dataKey="name" />
                   <YAxis />
                   <Tooltip />
-                  <Bar dataKey="pv" stackId="1" fill="#8884d8" />
-                  <Bar dataKey="uv" stackId="1" fill="#82ca9d" />
-                  <Bar type="monotone" dataKey="amt" fill="#ffc658" />
+                  <Bar dataKey="fa" fill="#8884d8" />
+                  <Bar dataKey="rt" fill="#82ca9d" />
                 </BarChart>
               </ResponsiveContainer>
-            </div>
-          </Panel>
-
-          <Panel
-            header={<span>
-              <i className="fa fa-clock-o fa-fw" /> Responsive Timeline
-            </span>}
-          >
-            <div>
-              <ul className="timeline">
-                <li>
-                  <div className="timeline-badge"><i className="fa fa-check" />
-                  </div>
-                  <div className="timeline-panel">
-                    <div className="timeline-heading">
-                      <h4 className="timeline-title">Lorem ipsum dolor</h4>
-                      <p>
-                        <small className="text-muted">
-                          <i className="fa fa-clock-o" /> 11 hours ago via Twitter
-                        </small>
-                      </p>
-                    </div>
-                    <div className="timeline-body">
-                      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Libero
-                        laboriosam dolor perspiciatis omnis exercitationem. Beatae, officia
-                        pariatur? Est cum veniam excepturi. Maiores praesentium, porro voluptas
-                        suscipit facere rem dicta, debitis.
-                      </p>
-                    </div>
-                  </div>
-                </li>
-                <li className="timeline-inverted">
-                  <div className="timeline-badge warning"><i className="fa fa-credit-card" />
-                  </div>
-                  <div className="timeline-panel">
-                    <div className="timeline-heading">
-                      <h4 className="timeline-title">Lorem ipsum dolor</h4>
-                    </div>
-                    <div className="timeline-body">
-                      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Autem dolorem
-                        quibusdam, tenetur commodi provident cumque magni voluptatem libero, quis
-                        rerum. Fugiat esse debitis optio, tempore. Animi officiis alias, officia
-                        repellendus.
-                      </p>
-                      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Laudantium
-                        maiores odit qui est tempora eos, nostrum provident explicabo dignissimos
-                        debitis vel! Adipisci eius voluptates, ad aut recusandae minus eaque facere.
-                      </p>
-                    </div>
-                  </div>
-                </li>
-                <li>
-                  <div className="timeline-badge danger"><i className="fa fa-bomb" />
-                  </div>
-                  <div className="timeline-panel">
-                    <div className="timeline-heading">
-                      <h4 className="timeline-title">Lorem ipsum dolor</h4>
-                    </div>
-                    <div className="timeline-body">
-                      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Repellendus
-                        numquam facilis enim eaque, tenetur nam id qui vel velit similique nihil
-                        iure molestias aliquam, voluptatem totam quaerat, magni commodi quisquam.
-                      </p>
-                    </div>
-                  </div>
-                </li>
-              </ul>
             </div>
           </Panel>
 
@@ -225,40 +194,20 @@ function Home(props, context) {
           >
             <ListGroup>
               <ListGroupItem href="" onClick={(e) => { e.preventDefault(); }}>
-                <i className="fa fa-comment fa-fw" /> New Comment
+                <i className="fa fa-comment fa-fw" /> New Challenge Question
                 <span className="pull-right text-muted small"><em>4 minutes ago</em></span>
               </ListGroupItem>
               <ListGroupItem href="" onClick={(e) => { e.preventDefault(); }}>
-                <i className="fa fa-twitter fa-fw" /> 3 New Followers
-                <span className="pull-right text-muted small"><em>12 minutes ago</em></span>
+                <i className="fa fa-bolt fa-fw" /> App Error!
+                <span className="pull-right text-muted small"><em>38 minutes ago</em></span>
               </ListGroupItem>
               <ListGroupItem href="" onClick={(e) => { e.preventDefault(); }}>
-                <i className="fa fa-envelope fa-fw" /> Message Sent
-                <span className="pull-right text-muted small"><em>27 minutes ago</em></span>
+                <i className="fa fa-bolt fa-fw" /> App Error!
+                <span className="pull-right text-muted small"><em>2 hours ago</em></span>
               </ListGroupItem>
               <ListGroupItem href="" onClick={(e) => { e.preventDefault(); }}>
-                <i className="fa fa-tasks fa-fw" /> New Task
-                <span className="pull-right text-muted small"><em>43 minutes ago</em></span>
-              </ListGroupItem>
-              <ListGroupItem href="" onClick={(e) => { e.preventDefault(); }}>
-                <i className="fa fa-upload fa-fw" /> Server Rebooted
-                <span className="pull-right text-muted small"><em>11:32 AM</em></span>
-              </ListGroupItem>
-              <ListGroupItem href="" onClick={(e) => { e.preventDefault(); }}>
-                <i className="fa fa-bolt fa-fw" /> Server Crashed!
-                <span className="pull-right text-muted small"><em>11:13 AM</em></span>
-              </ListGroupItem>
-              <ListGroupItem href="" onClick={(e) => { e.preventDefault(); }}>
-                <i className="fa fa-warning fa-fw" /> Server Not Responding
-                <span className="pull-right text-muted small"><em>10:57 AM</em></span>
-              </ListGroupItem>
-              <ListGroupItem href="" onClick={(e) => { e.preventDefault(); }}>
-                <i className="fa fa-shopping-cart fa-fw" /> New Order Placed
-                <span className="pull-right text-muted small"><em>9:49 AM</em></span>
-              </ListGroupItem>
-              <ListGroupItem href="" onClick={(e) => { e.preventDefault(); }}>
-                <i className="fa fa-money fa-fw" /> Payment Received
-                <span className="pull-right text-muted small"><em>Yesterday</em></span>
+                <i className="fa fa-comment fa-fw" /> 5 New Challenge Questions
+                <span className="pull-right text-muted small"><em>yesterday</em></span>
               </ListGroupItem>
             </ListGroup>
             <Button block>View All Alerts</Button>
@@ -266,11 +215,11 @@ function Home(props, context) {
 
           <Panel
             header={<span>
-              <i className="fa fa-bar-chart-o fa-fw" /> Donut Chart Example
+              <i className="fa fa-bar-chart-o fa-fw" /> Users by Browser
             </span>}
           >
             <div>
-              <Donut data={data} color="#8884d8" innerRadius="70%" outerRadius="90%" />
+              <Donut data={browserData} color="#8884d8" innerRadius="70%" outerRadius="90%" />
             </div>
           </Panel>
 
